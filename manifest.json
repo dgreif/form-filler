@@ -1,0 +1,40 @@
+{
+  "manifest_version": 2,
+  "name": "Kinder Pack Getter",
+  "description": "Automatically get me a kinder pack",
+  "version": "1.0",
+  "content_scripts": [
+    {
+      "matches": ["http://*.mykinderpack.com/", "http://*.mykinderpack.com/collections/daily-stockings"],
+      "js": ["content-script.js"],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "http://*.mykinderpack.com/collections/*",
+        "http://*.mykinderpack.com/products/*"
+      ],
+      "js": ["product-page.js"],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "http://*.mykinderpack.com/cart/*"
+      ],
+      "js": ["cart-page.js"],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "http://*.mykinderpack.com/*"
+      ],
+      "exclude_matches": [
+        "http://*.mykinderpack.com/"
+      ],
+      "js": ["contents-dump.js"]
+    }
+  ],
+  "permissions": [
+    "activeTab"
+  ]
+}
